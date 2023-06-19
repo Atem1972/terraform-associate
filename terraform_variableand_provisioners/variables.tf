@@ -9,7 +9,7 @@ variable "typeinstances" {
   description   = "type of the instances"
 }
 
-# Declring variable using complex type : List of Object
+# Declaring variable using complex type : List of Object
 variable "rules" {
   type = list(object({
     port        = number
