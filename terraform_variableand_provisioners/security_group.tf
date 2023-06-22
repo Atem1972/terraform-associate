@@ -9,7 +9,7 @@ data "aws_availability_zones" "available_zones" {}
 resource "aws_default_subnet" "default_az1" {
   availability_zone = data.aws_availability_zones.available_zones.names[0]
 
-  tags   = {
+  tags = {
     Name = "utrains default subnet"
   }
 }
@@ -21,23 +21,31 @@ resource "aws_security_group" "webserver_security_group" {
   vpc_id      = aws_default_vpc.default_vpc.id
 
   # allow access on these port 80 and 22 for Server using Dynamic blocks. Values are all defined in the variables.tf file
- dynamic "ingress" {
-    for_each = var.rules
-    content {
-      from_port   = ingress.value["port"]
-      to_port     = ingress.value["port"]
-      protocol    = ingress.value["proto"]
-      cidr_blocks = ingress.value["cidr_blocks"]
-    }
-  }
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = -1
-    cidr_blocks      = ["0.0.0.0/0"]
+  # allow access on port 8080 for Jenkins Server
+  ingress {
+    description = "http proxy access"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags   = {
+  # allow access on port 22 ssh connection
+  ingress {
+    description = "ssh access"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
     Name = "Security group"
   }
 }
