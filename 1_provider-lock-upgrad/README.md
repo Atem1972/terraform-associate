@@ -24,3 +24,7 @@ Upgrade the AWS provider.
 terraform init -upgrade
 ```
 
+### Conclusion 
+
+- In this tutorial, we've seen the importance of the lock file, which is used to update provider versions. 
+- It's important not to delete this file from the repository so that all developers working on the same code have the same provider version.
