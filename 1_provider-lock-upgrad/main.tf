@@ -13,8 +13,3 @@ resource "aws_s3_bucket" "sample" {
     public_bucket = true
   }
 }
-
-resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.sample.id
-  acl    = "public-read"
-}
