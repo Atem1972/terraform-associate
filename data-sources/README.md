@@ -31,7 +31,7 @@ cd data-sources-vpc
 ```
 - Set the TF_CLOUD_ORGANIZATION environment variable to your Terraform Cloud organization name. __This will configure your Terraform Cloud integration.__
     * Open your Terraform Cloud account and copy your Organization name
-        ![terraform cloud ](../../media/organization.png "CLOUD_ORGANIZATION")
+        ![terraform cloud ](../media/organization.png "CLOUD_ORGANIZATION")
 
     * Open the Terminal and export your cloud organization name like environment variable. 
         ```
