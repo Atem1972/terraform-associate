@@ -1,6 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 provider "aws" {
   region =   data.terraform_remote_state.vpc.outputs.aws_region
 }

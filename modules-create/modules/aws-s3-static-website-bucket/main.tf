@@ -1,6 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 # Terraform configuration
 
 resource "aws_s3_bucket" "s3_bucket" {

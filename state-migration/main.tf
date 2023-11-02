@@ -1,8 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 ## Terraform configuration
-
 terraform {
   cloud {
     organization = "hermann_company"
