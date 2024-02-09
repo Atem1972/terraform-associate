@@ -7,7 +7,9 @@ Learn how Terraform data sources help you import data into your Terraform config
 - Data sources make your configuration more flexible and dynamic and let you reference values from other configurations, helping you scope your configuration while still referencing any dependent resource attributes.
 
 ### Goal : 
-- In this tutorial, you will use data sources to make your configuration more dynamic. 
+In this tutorial, you will use data sources to make your configuration more dynamic:
+- In the first part, we will use the simple datasource from the AWS provider (__aws_availability_zones__)
+- In the second part, we 
 
 ### Prerequisites
 For this tutorial, you will need:
@@ -43,21 +45,20 @@ make terraform login command, your terraform cloud are open. Then copy and paste
 
 
 ## Initialize VPC workspace
-- Change to the VPC repository directory.
+- Switch to the VPC repository directory.
 ```
 cd data-sources-vpc
 ```
 
-
 - Initialize your configuration. Terraform will automatically create the workspace in your Terraform Cloud organization.
-     ```
+    ```
         terraform init
     ```
 
 ## Update VPC region
-The VPC configuration uses a variable called aws_region with a default value of us-east-1 to set the region.
+The VPC configuration uses a variable called __aws_region__ with a default value of __us-east-1__ to set the region.
 
-However, changing the value of the aws_region variable will not successfully change the region because the VPC configuration includes an azs argument to set Availability Zones, which is a hard-coded list of availability zones in the us-east-1 region.
+However, changing the value of the __aws_region__ variable will not successfully change the region because the VPC configuration includes an azs argument to set Availability Zones, which is a hard-coded list of availability zones in the us-east-1 region.
 
     ```
     module "vpc" {
@@ -67,7 +68,7 @@ However, changing the value of the aws_region variable will not successfully cha
     }
     ```
 
-- Use the aws_availability_zones data source to load the available AZs for the current region. Add the following to main.tf.
+- Use the __aws_availability_zones__ data source to load the available AZs for the current region. Add the following to main.tf.
 
     ```
         data "aws_availability_zones" "available" {
@@ -80,7 +81,7 @@ However, changing the value of the aws_region variable will not successfully cha
         }
 
     ```
-- ou can reference data source attributes with the pattern data.<NAME>.<ATTRIBUTE>. Update the VPC configuration to use this data source to set the list of availability zones.
+- You can reference __data source__ attributes with the pattern __data.NAME.ATTRIBUTE__. Update the VPC configuration to use this data source to set the list of availability zones.
 
     ```
         module "vpc" {
@@ -97,12 +98,15 @@ However, changing the value of the aws_region variable will not successfully cha
         }
     ```
 
-- onfigure the VPC workspace to output the region, which the application workspace will require as an input. Add a data source to __main.tf__ to access region information.
+Note : [To see more about the slice function](https://developer.hashicorp.com/terraform/language/functions/slice)
+
+
+- Configure the VPC workspace to output the region, which the application workspace will require as an input. Add a data source to __main.tf__ to access region information.
 
     ```
         data "aws_region" "current" { }
     ```
-    * Add an output for the region to __outputs.tf__.
+- Add an output for the region to __outputs.tf__.
 
         ```
             output "aws_region" {
@@ -111,10 +115,13 @@ However, changing the value of the aws_region variable will not successfully cha
             }
         ```
 ## Create infrastructure
-Apply this configuration, setting the value of aws_region to us-west-1. Respond to the confirmation prompt with a yes.
+Apply this configuration, setting the value of aws_region to __us-west-1__. Respond to the confirmation prompt with a yes.
     ```
         terraform apply -var aws_region=us-west-1
     ```
+### Note: At stage, we have use a simple aws datasource to configure our vpc module. After apply the configuration you should have the VPC workspace (data-sources-vpc) in your terraform cloud account.
+
+Now, we will use this workspace as a datasource for another projet (__data-sources-app__). 
 
 # Configure Terraform remote state
 
