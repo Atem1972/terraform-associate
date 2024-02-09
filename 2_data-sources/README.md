@@ -24,12 +24,9 @@ The example configuration for this tutorial is hosted in two Folders : __data-so
 
 2. The application repository contains the configuration to deploy an example application consisting of a load balancer and an EC2 instance : code in __data-sources-app__ 
 
-## Initialize VPC workspace
-- Change to the VPC repository directory.
-```
-cd data-sources-vpc
-```
-- Set the TF_CLOUD_ORGANIZATION environment variable to your Terraform Cloud organization name. __This will configure your Terraform Cloud integration.__
+## Set the environment variables
+
+Set the TF_CLOUD_ORGANIZATION environment variable to your Terraform Cloud organization name. __This will configure your Terraform Cloud integration.__
     * Open your Terraform Cloud account and copy your Organization name
         ![terraform cloud ](../media/organization.png "CLOUD_ORGANIZATION")
 
@@ -38,10 +35,20 @@ cd data-sources-vpc
             # export TF_CLOUD_ORGANIZATION=Your_Terraform_Cloud_Organization in my case
             export TF_CLOUD_ORGANIZATION=hermann_company
         ```
-- make terraform login command, your terraform cloud are open. Then copy and paste your token in the terminal
+## Connect to your Terraform Organization
+make terraform login command, your terraform cloud are open. Then copy and paste your token in the terminal
     ```
     terraform login
     ```
+
+
+## Initialize VPC workspace
+- Change to the VPC repository directory.
+```
+cd data-sources-vpc
+```
+
+
 - Initialize your configuration. Terraform will automatically create the workspace in your Terraform Cloud organization.
      ```
         terraform init
