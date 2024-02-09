@@ -15,7 +15,7 @@ For this tutorial, you will need:
 - a Terraform Cloud account and organization. [Click here](https://app.terraform.io/public/signup/account?utm_source=learn) to create a Cloud or to login on it if your already have one
 - Terraform Cloud locally authenticated. [Click here](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login) to see the process
 - The AWS CLI.
-- a Terraform Cloud variable set configured with your AWS credentials.
+
 
 ## Open the Folders
 The example configuration for this tutorial is hosted in two Folders : __data-sources-vpc__ and __data-sources-app__ inside the folder called __data-sources__
